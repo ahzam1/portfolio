@@ -18,13 +18,32 @@ function genProjects(){
         let card = document.createElement("div");
         let title = document.createElement("h3");
         title.appendChild(document.createTextNode(res.title));
+
         card.appendChild(title);
 
-        let description = document.createTextNode('Description:' + res.description + ', ');
+
+        let desc = document.createElement("h4");
+        desc.appendChild(document.createTextNode('Description:'));
+        desc.style.margin=0;
+        card.appendChild(desc);
+
+
+        let description = document.createElement("p");
+        description.appendChild(document.createTextNode(res.description));
+        description.style.margin=0;
         card.appendChild(description);
 
-        let date = document.createTextNode('date:' + res.id);
-        card.appendChild(date);
+        card.appendChild(document.createElement("br"));
+        let tools = document.createElement("h4");
+        tools.appendChild(document.createTextNode('Tools:'));
+        tools.style.margin=0;
+        card.appendChild(tools);
+
+        let used = document.createElement("p");
+        used.appendChild(document.createTextNode(res.tools.join(", ")));
+        used.style.margin=0;
+        card.appendChild(used);
+
 
         let container = document.querySelector("#p");
         card.classList.add("card");

@@ -1,7 +1,7 @@
 var post = [{
   "title":"NeuroTech",
   "id":1,
-  "status":"Development",
+  "status":"10%",
   "description":"A Unity game intended to provide data for finding relationships between certain brain waves and human actions. The application utilizes the feedback from the MUSE Headband alongside user input to generate a timeline of interactions and brainwaves. Researchers at NeuroTech plan to use this timeline for creating a tool to aid ADHD.",
   "image":"https://picsum.photos/id/728/200/300",
   "tools":[
@@ -22,7 +22,7 @@ var post = [{
     "Python",
     "Tkinter"
   ],
-  "link":"",
+  "link":"https://github.com/ahzam1/warfriend",
   "readmore":""
 },
 {
@@ -35,7 +35,7 @@ var post = [{
     "Android",
     "Java"
   ],
-  "link":"",
+  "link":"https://github.com/CMPUT301F18T23/Symptomatic",
   "readmore":""
 },
 {
@@ -48,7 +48,7 @@ var post = [{
     "C++",
     "Blizzard API"
   ],
-  "link":"",
+  "link":"https://github.com/nocduro/cmput350",
   "readmore":""
 },
 {
@@ -60,7 +60,7 @@ var post = [{
   "tools":[
     "RPGMakerMV",
   ],
-  "link":"",
+  "link":"https://github.com/chaidar97/University",
   "readmore":""
 },
 
@@ -75,7 +75,7 @@ var post = [{
     "CSS",
     "JavaScript"
   ],
-  "link":"",
+  "link":"https://github.com/ahzam1/portfolio",
   "readmore":""
 },
 

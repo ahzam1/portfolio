@@ -43,6 +43,23 @@ function genProjects(){
         used.appendChild(document.createTextNode(res.tools.join(", ")));
         used.style.margin=0;
         card.appendChild(used);
+        let bigbr = document.createElement("br");
+        bigbr.style.marginTop="15px";
+        card.appendChild(bigbr);
+
+        let link = document.createElement("button");
+        link.appendChild(document.createTextNode('GITHUB →'));
+        link.onclick = function() {
+          window.open(res.link, '_blank');
+          console.log("gtes");
+        };
+        if(res.link == ""){
+          link.disabled=true;
+          link.title="Code is not public.";
+        }
+        card.appendChild(link);
+
+        
 
 
         let container = document.querySelector("#p");

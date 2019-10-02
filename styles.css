@@ -84,7 +84,7 @@ li:hover:not(.active) {
 .card {
   display: inline-block;
   margin:10px;
-
+  position: relative;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 10px;
@@ -112,4 +112,13 @@ br {
             display: block; /* makes it have a width */
             content: ""; /* clears default height */
             margin-top: -10px; /* change this to whatever height you want it */
+}
+
+.card button {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  border-radius: 8px;
+  color: #2C5364;
+  font-size: 13pt;
 }

@@ -3,15 +3,16 @@ $(document).ready(function() {
   genProjects();
    $(".subtitle").fadeIn("slow");
    $("li").click(function() {
+     sel = $(this).attr('id')
      document.getElementById(focus).classList.remove("active");
-     document.getElementById(focus.charAt(0)).style.display = "none";
-     focus = $(this).attr('id')
-     document.getElementById(focus).classList.add("active");
-     document.getElementById(focus.charAt(0)).style.display = "block";
+     $("#"+focus.charAt(0)).fadeOut("slow", function(){
+       $("#"+sel.charAt(0)).fadeIn("slow");
+     });
+     document.getElementById(sel).classList.add("active");
+     focus=sel;
    });
 
 });
-
 
 function genProjects(){
   post.forEach(res => {

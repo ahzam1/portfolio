@@ -26,21 +26,8 @@ var post = [{
   "readmore":""
 },
 {
-  "title":"Symptomatic",
-  "id":3,
-  "status":"Completed",
-  "description":"An android application created as a medium for doctors and patients to be able to communicate freely with each other about their symptoms and ailments. It enabled patients to track their symptoms over time while also allowing doctors to keep track of these symptoms.",
-  "image":"https://picsum.photos/id/728/200/300",
-  "tools":[
-    "Android",
-    "Java"
-  ],
-  "link":"https://github.com/CMPUT301F18T23/Symptomatic",
-  "readmore":""
-},
-{
   "title":"StarCraft II Bot",
-  "id":4,
+  "id":3,
   "status":"Completed",
   "description":"A 'bot' created to play the game StarCraft II, with the sole purpose to beat other bots. An interesting and fun project which started with a few hiccups (as none of us had played the game before) that ended up performing surprisingly well! Terran 3Rax Marine Rush maybe a bit overpowered.",
   "image":"https://picsum.photos/id/728/200/300",
@@ -52,21 +39,22 @@ var post = [{
   "readmore":""
 },
 {
-  "title":"Labyrinthe",
-  "id":5,
+  "title":"Symptomatic",
+  "id":4,
   "status":"Completed",
-  "description":"A game created in RPGMAKERMV which explores the story of a trapped student within the undergrounds of a large school, scrambling through haunted areas, inspired puzzles and throwing fireballs at good ol' cave bats.",
+  "description":"An android application created as a medium for doctors and patients to be able to communicate freely with each other about their symptoms and ailments. It enabled patients to track their symptoms over time while also allowing doctors to keep track of these symptoms.",
   "image":"https://picsum.photos/id/728/200/300",
   "tools":[
-    "RPGMakerMV",
+    "Android",
+    "Java"
   ],
-  "link":"https://github.com/chaidar97/University",
+  "link":"https://github.com/CMPUT301F18T23/Symptomatic",
   "readmore":""
 },
 
 {
   "title":"Personal Website",
-  "id":6,
+  "id":5,
   "status":"Development",
   "description":"As an aspiring web developer, it would make sense for me to make my own website, right? It is rather motivating to see the difference between my first attempt (don't ask) and this one.",
   "image":"https://picsum.photos/id/728/200/300",
@@ -78,5 +66,16 @@ var post = [{
   "link":"https://github.com/ahzam1/portfolio",
   "readmore":""
 },
-
+{
+  "title":"Labyrinthe",
+  "id":6,
+  "status":"Completed",
+  "description":"A game created in RPGMAKERMV which explores the story of a trapped student within the undergrounds of a large school, scrambling through haunted areas, inspired puzzles and throwing fireballs at good ol' cave bats.",
+  "image":"https://picsum.photos/id/728/200/300",
+  "tools":[
+    "RPGMakerMV",
+  ],
+  "link":"https://github.com/chaidar97/University",
+  "readmore":""
+},
 ]

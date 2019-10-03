@@ -10,7 +10,8 @@ var post = [{
     "Muse"
   ],
   "link":"",
-  "readmore":""
+  "readmore":"",
+  "date":"Sept 2019"
 },
 {
   "title":"Warfriend",
@@ -23,7 +24,8 @@ var post = [{
     "Tkinter"
   ],
   "link":"https://github.com/ahzam1/warfriend",
-  "readmore":""
+  "readmore":"",
+  "date":"May 2018 - Aug 2018"
 },
 {
   "title":"StarCraft II Bot",
@@ -36,7 +38,8 @@ var post = [{
     "Blizzard API"
   ],
   "link":"https://github.com/nocduro/cmput350",
-  "readmore":""
+  "readmore":"",
+  "date":"Sept 2018 - Dec 2018"
 },
 {
   "title":"Symptomatic",
@@ -49,7 +52,8 @@ var post = [{
     "Java"
   ],
   "link":"https://github.com/CMPUT301F18T23/Symptomatic",
-  "readmore":""
+  "readmore":"",
+  "date":"Sept 2018 - Dec 2018"
 },
 
 {
@@ -64,7 +68,8 @@ var post = [{
     "JavaScript"
   ],
   "link":"https://github.com/ahzam1/portfolio",
-  "readmore":""
+  "readmore":"",
+  "date":"Sept 2019"
 },
 {
   "title":"Labyrinthe",
@@ -76,6 +81,7 @@ var post = [{
     "RPGMakerMV",
   ],
   "link":"https://github.com/chaidar97/University",
-  "readmore":""
+  "readmore":"",
+  "date":"Jan 2018 - April 2018"
 },
 ]

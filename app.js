@@ -1,12 +1,13 @@
 let focus = "projects"
 $(document).ready(function() {
   genProjects();
+  fillDesc();
    $(".subtitle").fadeIn("slow");
    $("li").click(function() {
      sel = $(this).attr('id')
      document.getElementById(focus).classList.remove("active");
-     $("#"+focus.charAt(0)).fadeOut("slow", function(){
-       $("#"+sel.charAt(0)).fadeIn("slow");
+     $("#"+focus.charAt(0)).fadeOut("fast", function(){
+       $("#"+sel.charAt(0)).fadeIn("fast");
      });
      document.getElementById(sel).classList.add("active");
      focus=sel;
@@ -85,4 +86,8 @@ function createBr(size){
   let br = document.createElement("br");
   br.style.marginTop=size;
   return br;
+}
+
+function fillDesc(){
+  document.getElementById('descme').innerHTML = about.about;
 }

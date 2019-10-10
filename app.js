@@ -1,7 +1,10 @@
-let focus = "projects"
+let focus = "projects";
+var aspirations = ["App Developer", "Web Developer", "Game Programmer", "Adult"];
+var curr = 0;
 $(document).ready(function() {
   genProjects();
   fillDesc();
+  setInterval(rotate, 5000);
    $(".subtitle").fadeIn("slow");
    $("li").click(function() {
      sel = $(this).attr('id')
@@ -90,4 +93,14 @@ function createBr(size){
 
 function fillDesc(){
   document.getElementById('descme').innerHTML = about.about;
+}
+
+function rotate(){
+  elem = $("#asp");
+  elem.fadeOut(function(){
+        elem.html(aspirations[curr]);
+        curr++;
+        if(curr >= aspirations.length) { curr = 0; }
+        elem.fadeIn();
+    });
 }

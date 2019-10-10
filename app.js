@@ -47,7 +47,7 @@ function genProjects(){
         card.appendChild(createTools(res.tools));
 
 
-        card.appendChild(createBr("10px"));
+        card.appendChild(createBr("15px"));
 
 
         card.appendChild(createLink(res.link));
@@ -74,13 +74,15 @@ function createTools(text){
 
 function createLink(text){
   let link = document.createElement("button");
-  link.appendChild(document.createTextNode('GITHUB →'));
+  link.appendChild(document.createTextNode('GITHUB'));
   link.onclick = function() {
     window.open(text, '_blank');
   };
   if(text == ""){
     link.disabled=true;
     link.title="Code is not public.";
+    link.style.color="grey";
+    link.style.cursor="default"
   }
   return link;
 }

@@ -67,9 +67,9 @@ body, html{
 .nav{
   bottom: 0;
   position: absolute;
-  left:50%;
+  left: 50%;
   margin: 0 auto;
-  margin-left: -135px;
+  transform: translate(-50%, -50%);
   display: table;
 
 }
@@ -192,10 +192,11 @@ li:hover:not(.active) {
   display: flex;
   justify-content: left;
   align-items: center;
+  width: 95%;
 }
-
-.tools img{
-  padding-left: 5px;
+#toolsList, #langList{
+  width:100%;
+  text-align: left;
 }
 
 #descme{
@@ -203,12 +204,12 @@ li:hover:not(.active) {
   padding-left: 10px;
   padding-right: 10px;
 }
-.languages span{
+#langTitle{
   width:10%;
   text-align: left;
   font-weight: bold;
 }
-.tools span{
+#toolsTitle{
   width:10%;
   text-align: left;
   font-weight: bold;

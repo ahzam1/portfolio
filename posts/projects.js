@@ -1,13 +1,14 @@
 var post = [{
-  "title":"NeuroTech",
+  "title":"Canada NeuroTech",
   "id":1,
   "status":"10%",
-  "description":"A Unity game intended to provide data for finding relationships between certain brain waves and human actions. The application utilizes the feedback from the MUSE Headband alongside user input to generate a timeline of interactions and brainwaves. Researchers at NeuroTech plan to use this timeline for creating a tool to aid ADHD.",
+  "description":"Web Dashboard and API alongside a Unity game intended to provide data for finding relationships between certain brain waves and human actions. The application utilizes the feedback from the MUSE Headband alongside user input to generate a timeline of interactions and brainwaves. Researchers at Canada NeuroTech plan to use this timeline for creating a tool to aid ADHD/Autism.",
   "image":"https://picsum.photos/id/728/200/300",
   "tools":[
     "Android",
     "Unity",
-    "Muse"
+    "Muse",
+    "HTML, CSS, JavaScript, PHP, MySQL"
   ],
   "link":"",
   "readmore":"",
@@ -26,6 +27,19 @@ var post = [{
   "link":"https://github.com/ahzam1/warfriend",
   "readmore":"",
   "date":"May 2018 - Aug 2018"
+},
+{
+  "title":"Quote Tweeter",
+  "id":7,
+  "status":"Completed",
+  "description":"A twitter bot that fetches a quote from an API and tweets every so often. Just a personal interest I wanted to explore the workings of, while procrastinating studying for finals!",
+  "image":"https://picsum.photos/id/728/200/300",
+  "tools":[
+    "Python",
+  ],
+  "link":"https://github.com/ahzam1/quoteTweeter",
+  "readmore":"",
+  "date":"Dec 2019"
 },
 {
   "title":"StarCraft II Bot",

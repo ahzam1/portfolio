@@ -15,7 +15,8 @@ $(document).ready(function() {
      document.getElementById(sel).classList.add("active");
      focus=sel;
    });
-
+   jQuery("#toolsList").fitText();
+   jQuery("#langList").fitText();
 });
 
 function genProjects(){

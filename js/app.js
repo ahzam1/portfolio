@@ -15,8 +15,8 @@ $(document).ready(function() {
      document.getElementById(sel).classList.add("active");
      focus=sel;
    });
-   jQuery("#toolsList").fitText();
-   jQuery("#langList").fitText();
+   var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; //getting the width of the window.
+   console.log(width);
 });
 
 function genProjects(){

@@ -15,7 +15,10 @@ $(document).ready(function() {
      document.getElementById(sel).classList.add("active");
      focus=sel;
    });
-   console.log(window.mobilecheck())
+   if(window.mobilecheck()){
+     //mobile phone
+     alert("Mobile site is still under development, come back soon!");     
+   }
 });
 
 function genProjects(){

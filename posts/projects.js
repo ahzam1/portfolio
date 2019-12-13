@@ -11,6 +11,7 @@ var post = [{
     "HTML, CSS, JavaScript, PHP, MySQL"
   ],
   "link":"",
+  "video":"https://www.youtube.com/watch?v=ZQtz05hyxek",
   "readmore":"",
   "date":"Sept 2019"
 },

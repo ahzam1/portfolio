@@ -1,7 +1,51 @@
+body, html{
+    height:100%;
+    margin:0;
+    font-family: 'Raleway', sans-serif;
+    scroll-snap-type: y mandatory;
+    
+  }
 .mobile_intro{
     position: absolute;
-    left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
-    
+    transform: translate(0%, -70%);
+    width: 89%;
+    text-align: left;
+    margin-left: 10%;
+}
+#name{
+    font-weight:350;
+    font-size: 130px;
+    color: white;
+}
+.scrollbar{
+    width:65%;
+    height:15px;
+    background-color: white;
+    position: absolute;
+    bottom:40px;
+    transform:translate(-50%,0%);
+    left:50%;
+    border-radius: 5px;
+    margin: 30px 0px;
+}
+.subtitle{
+    color: #cdcdcd;
+    font-size:75px;
+}
+.page{
+    scroll-snap-align: start;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+}
+.mobile_main{
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, rgba(44,83,100, 0.7), rgba(32,58,67, .9), rgba(15,32,39, 1)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.mobile_projects{
+    background: red;  /* fallback for old browsers */
+}
+.mobile_about{
+    background: green;  /* fallback for old browsers */
 }

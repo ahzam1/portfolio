@@ -40,6 +40,44 @@ body, html{
     background: linear-gradient(to top, rgba(44,83,100, 0.7), rgba(32,58,67, .9), rgba(15,32,39, 1)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .mobile_projects h1, .mobile_about h1{
-    padding: 5%;
+    padding: 5% 0% 0 4.5%;
+    margin:0px;
+    margin-bottom: 20px;
     font-size:100px;
 }
+.project_card{
+    flex-grow: 1;
+    min-width: 80vw;
+    scroll-snap-align: center;
+    padding-right:3%;
+}
+.project_card h2{
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-size:60px;
+}
+.project_card h4{
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-size:45px;
+}
+.project_card p{
+    
+    font-size:40px;
+}
+.mobile_projects{
+    display: flex;
+    flex-direction: column;
+}
+.projects_container{
+    width:90%;
+    margin-left: 5%;
+    flex-grow: 1;
+    overflow-x: auto;
+    overflow: auto;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    scroll-snap-type: x mandatory;
+}
+/* Basically need to make this ^ fill rest of that things height, populate with projects and done. */

@@ -42,7 +42,10 @@ body, html{
 .mobile_projects{
     height: 70vh;
 }
-.mobile_projects h1, .mobile_about h1{
+.mobile_find{
+    height: 30vh;
+}
+.page h1{
     padding: 5% 0% 0 4.5%;
     margin:0px;
     margin-bottom: 20px;
@@ -74,7 +77,11 @@ body, html{
 .project_card p{
     font-size:35px;
 }
-
+.mobile_about p{
+    margin-left:5%;
+    margin-right:5%;
+    font-size: 35px;
+}
 .project_card button{
     
     font-size:40px;
@@ -95,4 +102,45 @@ body, html{
     align-items: space-around;
     scroll-snap-type: x mandatory;
 }
-/* Basically need to make this ^ fill rest of that things height, populate with projects and done. */
+.tools, .languages{
+    margin-left:5%;
+    margin-right: 5%;
+    font-size: 40px;
+}
+.tools i, .languages i{
+    font-size: 100px;
+}
+.mobile_about{
+    position: relative;
+    overflow-x: hidden;
+}
+.mobile_about img{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.mobile_about span{
+    font-weight: bold;
+}
+.links{
+    margin-left: 5%;
+    width: 90%;
+    text-align:center;
+}
+.links img{
+    padding: 2%;
+}
+#resume{
+    background: transparent;
+    border-style:solid;
+    border-width: 1px;
+    font-size:35pt;
+    margin-bottom: 10px;
+    padding:10px 20px;
+    cursor:pointer;
+    border-radius:20px;
+    border-color: grey;
+    color:black;
+    text-decoration: none;
+  }

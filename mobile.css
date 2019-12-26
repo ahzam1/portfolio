@@ -2,8 +2,6 @@ body, html{
     height:100%;
     margin:0;
     font-family: 'Raleway', sans-serif;
-    scroll-snap-type: y mandatory;
-    
   }
 .mobile_intro{
     position: absolute;
@@ -30,9 +28,9 @@ body, html{
     font-size:75px;
 }
 .page{
-    scroll-snap-align: start;
-    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    height: calc(var(--vh, 1vh) * 100);
+    
+    min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    min-height: calc(var(--vh, 1vh) * 100);
 }
 .mobile_main{
     background: #0F2027;  /* fallback for old browsers */
@@ -40,9 +38,12 @@ body, html{
     background: linear-gradient(to top, rgba(44,83,100, 0.7), rgba(32,58,67, .9), rgba(15,32,39, 1)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .mobile_projects{
+    min-height: 10px;
+
     height: 70vh;
 }
 .mobile_find{
+    min-height: 10px;
     height: 30vh;
 }
 .page h1{

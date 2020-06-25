@@ -79,10 +79,10 @@ function createTools(text){
 }
 
 function createLink(text, video){
-  let link = document.createElement("button");
+  let link = document.createElement("href");
 
   if(video && video.length>0){
-    link.appendChild(document.createTextNode('VIDEO'));
+    link.appendChild(document.createTextNode('video'));
     link.onclick = function() {
       window.open(video, '_blank');
     };
@@ -92,7 +92,7 @@ function createLink(text, video){
     link.style.color="grey";
     link.style.cursor="default"
   }else{
-    link.appendChild(document.createTextNode('GITHUB'));
+    link.appendChild(document.createTextNode('github'));
     link.onclick = function() {
       window.open(text, '_blank');
     };

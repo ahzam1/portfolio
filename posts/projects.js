@@ -16,33 +16,6 @@ var post = [{
   "date":"Sept 2019"
 },
 {
-  "title":"Warfriend",
-  "id":2,
-  "status":"Completed",
-  "description":"A desktop application which requested timers using an API provided by WarframeStatus. The data requested was presented to inform players about in-game events without having to launch the game which took a decent amount of time. With automatic refreshes and color-coded information, it'd be hard for users to miss the events they want!",
-  "image":"https://picsum.photos/id/728/200/300",
-  "tools":[
-    "Python",
-    "Tkinter"
-  ],
-  "link":"https://github.com/ahzam1/warfriend",
-  "readmore":"",
-  "date":"May 2018 - Aug 2018"
-},
-{
-  "title":"Quote Tweeter",
-  "id":7,
-  "status":"Completed",
-  "description":"A twitter bot that fetches a quote from an API and tweets every so often. Just a personal interest I wanted to explore the workings of, while procrastinating studying for finals!",
-  "image":"https://picsum.photos/id/728/200/300",
-  "tools":[
-    "Python",
-  ],
-  "link":"https://github.com/ahzam1/quoteTweeter",
-  "readmore":"",
-  "date":"Dec 2019"
-},
-{
   "title":"StarCraft II Bot",
   "id":3,
   "status":"Completed",
@@ -55,6 +28,34 @@ var post = [{
   "link":"https://github.com/nocduro/cmput350",
   "readmore":"",
   "date":"Sept 2018 - Dec 2018"
+},
+{
+  "title":"Facial Landmark Tracker",
+  "id":7,
+  "status":"Completed",
+  "description":"A program that allows artists to use a regular video, and extract facial features and their movements. Tracking was completed using a pre-trained neural network using the Dlib python module alongside the imutils and the OpenCV modules. Once the scripts are run, the points are available in a global 3D format ready for use.",
+  "image":"https://picsum.photos/id/728/200/300",
+  "tools":[
+    "Python",
+    "Blender"
+  ],
+  "link":"https://github.com/ahzam1/CMPUT414Project",
+  "readmore":"",
+  "date":"April 2020"
+},
+{
+  "title":"Warfriend",
+  "id":2,
+  "status":"Completed",
+  "description":"A desktop application which requested timers using an API provided by WarframeStatus. The data requested was presented to inform players about in-game events without having to launch the game which took a decent amount of time. With automatic refreshes and color-coded information, it'd be hard for users to miss the events they want!",
+  "image":"https://picsum.photos/id/728/200/300",
+  "tools":[
+    "Python",
+    "Tkinter"
+  ],
+  "link":"https://github.com/ahzam1/warfriend",
+  "readmore":"",
+  "date":"May 2018 - Aug 2018"
 },
 {
   "title":"Symptomatic",
@@ -85,6 +86,19 @@ var post = [{
   "link":"https://github.com/ahzam1/portfolio",
   "readmore":"",
   "date":"Sept 2019"
+},
+{
+  "title":"Quote Tweeter",
+  "id":7,
+  "status":"Completed",
+  "description":"A twitter bot that fetches a quote from an API and tweets every so often. Just a personal interest I wanted to explore the workings of, while procrastinating studying for finals!",
+  "image":"https://picsum.photos/id/728/200/300",
+  "tools":[
+    "Python",
+  ],
+  "link":"https://github.com/ahzam1/quoteTweeter",
+  "readmore":"",
+  "date":"Dec 2019"
 },
 {
   "title":"Labyrinthe",

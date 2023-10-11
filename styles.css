@@ -3,26 +3,68 @@
     background: #ddd;
     color: #222;
     }
+    a :hover{
+        color: teal;
+    }
 }
 @media (prefers-color-scheme: dark) {
     body {
     background: #222;
     color: #ddd;
     }
+
+    a :hover{
+        color: maroon;
+    }
 }
+
 .card {
     font-family: monospace;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+
+}
+a{
+    all: unset;
+    cursor: pointer;
+}
+@media (pointer:fine), (pointer:none){
+    .card {
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    br{
+        display: none;
+    }
+    .card > h3{
+        margin-left: 15px;
+    }
+    
+   
 }
 
+@media (pointer: coarse)  {
+	.card{
+        left: 15%;
+        top: 30%;
+        -webkit-transform: translate(-15%, -30%);
+        transform: translate(-5%, -30%);
+    }
+    .card > h2 {
+        font-size: large;
+    }
+    .card > h3 {
+        font-size: small;
+    }
+
+   
+    
+}
 .card > h3{
     font-weight: normal;
     margin-top: -10px;
-    margin-left: 15px;
+
 }
 
 .card > h2 > i{

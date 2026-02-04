@@ -1,0 +1,208 @@
+/* styles.css */
+:root{
+  /* ===== Pastel Valentine Palette ===== */
+  --bg1: #fff1f5;
+  --bg2: #ffe4ec;
+
+  --card: rgba(255,255,255,.72);
+  --border: rgba(255, 105, 135, .18);
+
+  --text: #2b1b22;
+  --muted: rgba(43, 27, 34, .62);
+  --accent: #ff5f87;
+
+  --radius: 18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  height:100%;
+}
+
+body{
+  overflow:hidden;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+
+  background:
+    radial-gradient(900px 700px at 15% 10%, rgba(255, 95, 135, .22), transparent 60%),
+    radial-gradient(900px 700px at 85% 30%, rgba(255, 170, 190, .24), transparent 55%),
+    radial-gradient(700px 500px at 60% 85%, rgba(255, 230, 238, .9), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ===== Stage Container ===== */
+
+.stage{
+  height:100%;
+  width:100%;
+  position:relative;
+}
+
+/* ===== Progress Bars ===== */
+
+.progressWrap{
+  position:absolute;
+  top:12px;
+  left:0;
+  right:0;
+  padding:0 12px;
+  z-index:10;
+  pointer-events:none; /* don’t block taps */
+}
+
+.progress{
+  display:flex;
+  gap:6px;
+}
+
+.bar{
+  flex:1;
+  height:3px;
+  background: rgba(255, 95, 135, .18);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  width:0%;
+  background: rgba(255, 95, 135, .95);
+}
+
+/* ===== Slides ===== */
+
+.viewport{
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 16px;
+
+  /* Make “story” swipes reliable */
+  touch-action: none;
+}
+
+.slide{
+  width:min(520px,100%);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+/* This is the element we translate during swipe */
+#slide{
+  will-change: transform, opacity;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+#slide.dragging{
+  transition: none; /* finger-follow */
+}
+
+/* ===== Card Styling ===== */
+
+.card{
+  background: var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  backdrop-filter: blur(10px);
+  padding:20px;
+  box-shadow: 0 16px 40px rgba(43, 27, 34, .10);
+}
+
+/* ===== Cover Slide ===== */
+
+.cover{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+.cover h1{
+  font-size:38px;
+  line-height:1.15;
+}
+
+.cover h2{
+  font-size:30px;
+  margin-top:10px;
+  color:var(--accent);
+}
+
+/* ===== Photo Placeholder ===== */
+
+.photo{
+  height:60%;
+  border-radius:var(--radius);
+  background: linear-gradient(135deg, #ffb7c9, #ffdbe6);
+  box-shadow: inset 0 0 30px rgba(255,255,255,.4);
+}
+
+/* ===== Milestone Meta Text ===== */
+
+.meta{
+  margin-top:12px;
+}
+
+.meta h2{
+  font-size:20px;
+}
+
+.meta p{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* ===== Favorites Grid ===== */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.tile{
+  aspect-ratio:1;
+  border-radius:16px;
+  background: linear-gradient(135deg, #ffb7c9, #ffdbe6);
+  box-shadow: inset 0 0 20px rgba(255,255,255,.4);
+}
+
+/* ===== Final Card ===== */
+
+.final{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  height:100%;
+  text-align:center;
+}
+
+.final h2{
+  margin-bottom:10px;
+}
+
+.final p{
+  margin-top:8px;
+  line-height:1.5;
+}
+
+/* Optional: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  #slide{ transition: none; }
+}

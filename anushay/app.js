@@ -2,13 +2,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const slides = [
     { type: "cover" },
-    { type: "milestone", title: "First Date", date: "October 11th, 2025", caption: "I knew it was wraps on this day..." },
-    { type: "milestone", title: "BF / GF", date: "November 23rd, 2025", caption: "The day you gave up your rights" },
-    { type: "milestone", title: "'I love you'", date: "December 23rd, 2025", caption: "I said it first hehe" },
-    { type: "milestone", title: "Latest Date", date: "Feb 08, 2026", caption: "Look at us now, so perfect together" },
+    { type: "milestone", title: "First Date", date: "October 11th, 2025", caption: "I knew it was wraps on this day...", image:"photos/firstDate.jpg" },
+    { type: "milestone", title: "Boyfriend & Girlfriend", date: "November 23rd, 2025", caption: "The day you gave up your rights", image:"photos/firstDate.jpg" },
+    { type: "milestone", title: "'I love you'", date: "December 23rd, 2025", caption: "I said it first hehe", image:"photos/ily.jpg" },
+    { type: "milestone", title: "Latest Date", date: "Feb 08, 2026", caption: "Look at us now, so perfect together", image:"photos/latest.jpg" },
     { type: "favorites" },
     { type: "final" }
   ];
+
+  const SLIDE_DURATION_MS = 10000;
 
   let current = 0;
 
@@ -30,11 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Counts current slide as “filled”
-  function updateProgress() {
-    [...progressEl.children].forEach((bar, i) => {
+  function setProgressForIndex(idx, pct /* 0..1 */) {
+    const bars = [...progressEl.children];
+    bars.forEach((bar, i) => {
       const fill = bar.firstChild;
-      fill.style.width = i <= current ? "100%" : "0%";
+      if (i < idx) fill.style.width = "100%";
+      else if (i > idx) fill.style.width = "0%";
+      else fill.style.width = `${Math.max(0, Math.min(1, pct)) * 100}%`;
     });
   }
 
@@ -59,13 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
       slideEl.innerHTML = `
         <div class="card cover">
           <h1>Happy Valentine's Day</h1>
-          <h2>Jaanu ❤️</h2>
+          <h2>Anushay</h2>
+
+          <div class="swipe-hint">
+            Swipe →
+          </div>
         </div>
       `;
     } else if (s.type === "milestone") {
       slideEl.innerHTML = `
         <div class="card">
-          <div class="photo"></div>
+          <div class="photo"> <img src="${s.image}" alt="" /> </div>
           <div class="meta">
             <h2>${escapeHtml(s.title)}</h2>
             <p>${escapeHtml(s.date)}</p>
@@ -87,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (s.type === "final") {
       slideEl.innerHTML = `
         <div class="card final">
-          <h2>Meri Jaan</h2>
+          <h2>For You</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p>— Ahzam ❤️</p>
         </div>
@@ -95,11 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       slideEl.innerHTML = `<div class="card">Unknown slide.</div>`;
     }
-
-    updateProgress();
   }
 
-  /* ---------- Story-like transitions (correct-direction entry) ---------- */
+  /* ---------- Transitions ---------- */
 
   let isAnimating = false;
 
@@ -109,152 +115,251 @@ document.addEventListener("DOMContentLoaded", () => {
     slideEl.style.opacity = "1";
   }
 
-  // direction: "next" (new enters from right), "prev" (new enters from left)
-function goTo(targetIndex, direction, fromDx = 0) {
-  if (isAnimating) return;
-
-  const clamped = Math.max(0, Math.min(targetIndex, slides.length - 1));
-  if (clamped === current) {
-    animateSnapBack();
-    return;
+  function stopAuto() {
+    if (rafId !== null) cancelAnimationFrame(rafId);
+    rafId = null;
+    startedAt = 0;
+    elapsedBeforePause = 0;
+    isPaused = false;
   }
 
-  isAnimating = true;
+  function goTo(targetIndex, direction, fromDx = 0) {
+    if (isAnimating) return;
 
-  const width = window.innerWidth;
-  const outX = direction === "next" ? -width : width;   // current exits
-  const inStartX = direction === "next" ? width : -width; // new enters
+    const clamped = Math.max(0, Math.min(targetIndex, slides.length - 1));
+    if (clamped === current) {
+      animateSnapBack();
+      return;
+    }
 
-  // Start exit from current drag position (smooth)
-  slideEl.style.transition = "none";
-  slideEl.style.transform = `translateX(${fromDx}px)`;
+    isAnimating = true;
+    stopAuto();
 
-  // Force layout so the browser commits the starting transform immediately
-  void slideEl.offsetHeight;
+    const width = window.innerWidth;
+    const outX = direction === "next" ? -width : width;
+    const inStartX = direction === "next" ? width : -width;
 
-  // Animate current slide out
-  slideEl.style.transition = "transform 220ms ease, opacity 220ms ease";
-  slideEl.style.transform = `translateX(${outX}px)`;
-  slideEl.style.opacity = "0";
-
-  slideEl.addEventListener("transitionend", function outEnd() {
-    slideEl.removeEventListener("transitionend", outEnd);
-
-    // Swap content while hidden/offscreen
-    current = clamped;
-    renderSlide();
-
-    // Place new slide offscreen on correct side (still hidden)
     slideEl.style.transition = "none";
-    slideEl.style.transform = `translateX(${inStartX}px)`;
-    slideEl.style.opacity = "0";
-
-    // Force layout again to avoid “delay” / missed transition
+    slideEl.style.transform = `translateX(${fromDx}px)`;
     void slideEl.offsetHeight;
 
-    // Animate new slide in immediately
     slideEl.style.transition = "transform 220ms ease, opacity 220ms ease";
-    slideEl.style.transform = "translateX(0px)";
-    slideEl.style.opacity = "1";
+    slideEl.style.transform = `translateX(${outX}px)`;
+    slideEl.style.opacity = "0";
 
-    slideEl.addEventListener("transitionend", function inEnd() {
-      slideEl.removeEventListener("transitionend", inEnd);
-      isAnimating = false;
+    slideEl.addEventListener("transitionend", function outEnd() {
+      slideEl.removeEventListener("transitionend", outEnd);
+
+      current = clamped;
+      renderSlide();
+
+      slideEl.style.transition = "none";
+      slideEl.style.transform = `translateX(${inStartX}px)`;
+      slideEl.style.opacity = "0";
+      void slideEl.offsetHeight;
+
+      slideEl.style.transition = "transform 220ms ease, opacity 220ms ease";
+      slideEl.style.transform = "translateX(0px)";
+      slideEl.style.opacity = "1";
+
+      slideEl.addEventListener("transitionend", function inEnd() {
+        slideEl.removeEventListener("transitionend", inEnd);
+        isAnimating = false;
+        startAuto();
+      }, { once: true });
     }, { once: true });
-
-  }, { once: true });
-}
-
+  }
 
   function next(fromDx = 0) { goTo(current + 1, "next", fromDx); }
   function prev(fromDx = 0) { goTo(current - 1, "prev", fromDx); }
 
-  /* ---------- Pointer swipe with “drag-follow” + tap zones ---------- */
+  /* ---------- Auto progress + auto-advance ---------- */
 
-  let startX = 0;
-  let startY = 0;
-  let dx = 0;
-  let dy = 0;
-  let pointerDown = false;
+  let rafId = null;
+  let startedAt = 0;
+  let elapsedBeforePause = 0;
+  let isPaused = false;
+
+  function shouldAutoAdvance() {
+    return slides[current]?.type !== "final";
+  }
+
+  function pauseAuto() {
+    if (!shouldAutoAdvance()) return;
+    if (isPaused) return;
+    isPaused = true;
+    if (startedAt) {
+      elapsedBeforePause += performance.now() - startedAt;
+      startedAt = 0;
+    }
+  }
+
+  function resumeAuto() {
+    if (!shouldAutoAdvance()) return;
+    if (!isPaused) return;
+    isPaused = false;
+    startedAt = performance.now();
+    tick();
+  }
+
+  function startAuto() {
+    if (!shouldAutoAdvance()) {
+      setProgressForIndex(current, 1);
+      return;
+    }
+
+    if (rafId !== null) cancelAnimationFrame(rafId);
+    rafId = null;
+    elapsedBeforePause = 0;
+    isPaused = false;
+    startedAt = performance.now();
+
+    setProgressForIndex(current, 0);
+    tick();
+  }
+
+  function tick() {
+    if (!shouldAutoAdvance()) {
+      setProgressForIndex(current, 1);
+      return;
+    }
+    if (isAnimating || isPaused) return;
+
+    const now = performance.now();
+    const elapsed = elapsedBeforePause + (startedAt ? (now - startedAt) : 0);
+    const pct = elapsed / SLIDE_DURATION_MS;
+
+    setProgressForIndex(current, pct);
+
+    if (pct >= 1) {
+      next(0);
+      return;
+    }
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pauseAuto();
+    else resumeAuto();
+  });
+
+  /* ---------- Unified gesture handlers (Pointer + Touch) ---------- */
+
+  let startX = 0, startY = 0, dx = 0, dy = 0;
+  let down = false;
   let didDrag = false;
 
-  const DRAG_START_THRESHOLD = 6;     // px before drag mode
-  const SWIPE_COMMIT_THRESHOLD = 70;  // px to commit
-  const MAX_VERTICAL_DRIFT = 120;     // ignore if mostly vertical
+  const DRAG_START_THRESHOLD = 6;
+  const SWIPE_COMMIT_THRESHOLD = 70;
+  const MAX_VERTICAL_DRIFT = 120;
 
-  viewportEl.addEventListener("pointerdown", (e) => {
+  function onDown(x, y) {
     if (isAnimating) return;
-
-    pointerDown = true;
+    down = true;
     didDrag = false;
-    startX = e.clientX;
-    startY = e.clientY;
+    startX = x;
+    startY = y;
     dx = 0;
     dy = 0;
 
     slideEl.classList.add("dragging");
-    viewportEl.setPointerCapture?.(e.pointerId);
-  });
+    pauseAuto();
+  }
 
-  viewportEl.addEventListener("pointermove", (e) => {
-    if (!pointerDown || isAnimating) return;
+  function onMove(x, y, preventDefaultFn) {
+    if (!down || isAnimating) return;
 
-    dx = e.clientX - startX;
-    dy = e.clientY - startY;
+    dx = x - startX;
+    dy = y - startY;
 
-    // If clearly vertical, ignore (story-like)
     if (Math.abs(dy) > MAX_VERTICAL_DRIFT && Math.abs(dy) > Math.abs(dx)) return;
 
     if (Math.abs(dx) >= DRAG_START_THRESHOLD) didDrag = true;
 
-    // Finger-follow
     slideEl.style.transform = `translateX(${dx}px)`;
-
-    // Subtle fade while dragging
     const fade = Math.max(0.35, 1 - Math.min(1, Math.abs(dx) / (window.innerWidth * 0.9)));
     slideEl.style.opacity = String(fade);
 
-    // Prevent browser gesture while horizontal dragging
-    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
-  }, { passive: false });
+    if (Math.abs(dx) > Math.abs(dy) && preventDefaultFn) preventDefaultFn();
+  }
 
-  viewportEl.addEventListener("pointerup", (e) => {
-    if (!pointerDown) return;
-    pointerDown = false;
+  function onUp(x) {
+    if (!down) return;
+    down = false;
     slideEl.classList.remove("dragging");
 
-    // No drag => tap zones
     if (!didDrag) {
       slideEl.style.transform = "translateX(0px)";
       slideEl.style.opacity = "1";
 
-      const x = e.clientX;
       if (x > window.innerWidth / 2) next(0);
       else prev(0);
+
+      if (!isAnimating) resumeAuto();
       return;
     }
 
-    // Commit swipe if far enough
     if (Math.abs(dx) >= SWIPE_COMMIT_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 0) next(dx); // swipe left => next enters from right
-      else prev(dx);        // swipe right => prev enters from left
+      if (dx < 0) next(dx);
+      else prev(dx);
     } else {
       animateSnapBack();
+      resumeAuto();
     }
 
     dx = 0;
     dy = 0;
-  });
+  }
 
-  viewportEl.addEventListener("pointercancel", () => {
-    pointerDown = false;
+  function onCancel() {
+    down = false;
     didDrag = false;
     slideEl.classList.remove("dragging");
     animateSnapBack();
+    resumeAuto();
+  }
+
+  // Pointer events (desktop + many mobiles)
+  viewportEl.addEventListener("pointerdown", (e) => {
+    viewportEl.setPointerCapture?.(e.pointerId);
+    onDown(e.clientX, e.clientY);
   });
+
+  viewportEl.addEventListener("pointermove", (e) => {
+    onMove(e.clientX, e.clientY, () => e.preventDefault());
+  }, { passive: false });
+
+  viewportEl.addEventListener("pointerup", (e) => {
+    onUp(e.clientX);
+  });
+
+  viewportEl.addEventListener("pointercancel", onCancel);
+
+  // Touch fallback (iOS Safari reliable)
+  viewportEl.addEventListener("touchstart", (e) => {
+    if (!e.touches || e.touches.length !== 1) return;
+    const t = e.touches[0];
+    onDown(t.clientX, t.clientY);
+  }, { passive: false });
+
+  viewportEl.addEventListener("touchmove", (e) => {
+    if (!e.touches || e.touches.length !== 1) return;
+    const t = e.touches[0];
+    onMove(t.clientX, t.clientY, () => e.preventDefault());
+  }, { passive: false });
+
+  viewportEl.addEventListener("touchend", (e) => {
+    const t = e.changedTouches && e.changedTouches[0];
+    if (!t) return;
+    onUp(t.clientX);
+  }, { passive: false });
+
+  viewportEl.addEventListener("touchcancel", onCancel, { passive: false });
 
   /* ---------- Init ---------- */
 
   createProgressBars();
   renderSlide();
+  startAuto();
 });

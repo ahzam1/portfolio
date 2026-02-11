@@ -219,23 +219,72 @@ body{
   box-shadow: inset 0 0 20px rgba(255,255,255,.4);
 }
 
+.tile img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* grid should crop for consistency */
+  border-radius: 16px;
+  display: block;
+}
 /* ===== Final Card ===== */
 
+/* Final card layout */
 .final{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  height:100%;
-  text-align:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.final h2{
-  margin-bottom:10px;
+/* Message formatting */
+.message{
+  margin-top: 16px;
+  text-align: left;
 }
 
-.final p{
-  margin-top:8px;
-  line-height:1.5;
+.message p{
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+/* Signature */
+.message .signature{
+  margin-top: 20px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* End slide */
+.end-slide{
+  align-items: center;
+  text-align: center;
+}
+
+/* Restart button */
+.restart-btn{
+  margin-top: 32px;
+  padding: 12px 22px;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  color: white;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.restart-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(255, 95, 135, .35);
+}
+
+.restart-btn:active{
+  transform: translateY(0);
 }
 
 /* Optional: reduce motion */

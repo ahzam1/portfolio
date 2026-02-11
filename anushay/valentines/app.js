@@ -2,15 +2,26 @@
 document.addEventListener("DOMContentLoaded", () => {
   const slides = [
     { type: "cover" },
-    { type: "milestone", title: "First Date", date: "October 11th, 2025", caption: "I knew it was wraps on this day...", image:"photos/firstDate.jpg" },
-    { type: "milestone", title: "Boyfriend & Girlfriend", date: "November 23rd, 2025", caption: "The day you gave up your rights", image:"photos/firstDate.jpg" },
-    { type: "milestone", title: "'I love you'", date: "December 23rd, 2025", caption: "I said it first hehe", image:"photos/ily.jpg" },
-    { type: "milestone", title: "Latest Date", date: "Feb 08, 2026", caption: "Look at us now, so perfect together", image:"photos/latest.jpg" },
-    { type: "favorites" },
-    { type: "final" }
+    { type: "milestone", title: "First Date", date: "October 11th, 2025", caption: "I knew it was wraps on this day... @Mambo", image:"photos/firstDate.jpg" },
+    { type: "milestone", title: "Boyfriend & Girlfriend", date: "November 23rd, 2025", caption: "The day you gave up your rights @Streetsville", image:"photos/bfgf.jpeg" },
+    { type: "milestone", title: "'I love you'", date: "December 23rd, 2025", caption: "I said it first hehe @Mishree", image:"photos/1month.jpeg" },
+    { type: "milestone", title: "Latest Date", date: "Feb 08, 2026", caption: "Look at us now, so perfect together @Downtown", image:"photos/latest.jpg" },
+    { type: "favorites",
+        images: [
+          "photos/fav1.jpeg",
+          "photos/fav2.jpg",
+          "photos/fav3.jpg",
+          "photos/fav4.jpg",
+          "photos/fav5.jpeg",
+          "photos/fav6.png"
+        ]
+     },
+    { type: "final" },
+    { type: "end" }
+
   ];
 
-  const SLIDE_DURATION_MS = 10000;
+  const SLIDE_DURATION_MS = 20000;
 
   let current = 0;
 
@@ -86,18 +97,46 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="card">
           <h2>Us ❤️</h2>
           <div class="grid">
-            <div class="tile"></div><div class="tile"></div>
-            <div class="tile"></div><div class="tile"></div>
-            <div class="tile"></div><div class="tile"></div>
+            ${s.images.map(src => `
+              <div class="tile">
+                <img src="${src}" alt="" />
+              </div>
+            `).join("")}
           </div>
         </div>
       `;
     } else if (s.type === "final") {
       slideEl.innerHTML = `
         <div class="card final">
-          <h2>For You</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>— Ahzam ❤️</p>
+          <h2>Meri Jaan,</h2>
+          <div class="message">
+            <p>
+            Ever since I laid my eyes on you, I knew.
+            I knew you were the one for me, with those gorgeous eyes and that heart-melting smile. I knew that with you, I would be happier than I had ever been, and you proved me right.
+            <br>
+            I hope that these past few months have been as life-changing for you as they have been for me. You’ve taught me that soul mates exist, and that these rose-tinted glasses seem to be glued on. I want to continue to be a source of support, happiness, and love for you forever. You bring me so much happiness every day, and I will always be trying to pay that back so you can feel even a fraction of how much you do for me. 
+            <br> 
+
+            I'm so glad that we've made so much progress in our relationship in these 3 months, and I can confidently say I've made true on my promise to learn you everyday, and it brings me so much joy to be the lucky one to get to do so. Time has flown by with you, and there are so many moments where I wish I could pause time just to spend another moment with you.
+            <br> 
+
+            Here's to countless more anniversaries, dates, and honestly just forever with you.
+            </p>
+          </div>
+        </div>
+      `;
+    } else if (s.type === "end") {
+      slideEl.innerHTML = `
+        <div class="card cover end-slide">
+          <h3>I love you, meri jaan</h3>
+          <br>
+          <p> Ahzam </p>
+          <br>
+          <p> 14th February 2026 </p>
+
+          <button class="restart-btn">
+            Restart?
+          </button>
         </div>
       `;
     } else {
@@ -122,6 +161,16 @@ document.addEventListener("DOMContentLoaded", () => {
     elapsedBeforePause = 0;
     isPaused = false;
   }
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".restart-btn");
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Hard reset
+     window.location.reload();
+  });
 
   function goTo(targetIndex, direction, fromDx = 0) {
     if (isAnimating) return;
@@ -181,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isPaused = false;
 
   function shouldAutoAdvance() {
-    return slides[current]?.type !== "final";
+    return true;
   }
 
   function pauseAuto() {
@@ -232,6 +281,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setProgressForIndex(current, pct);
 
     if (pct >= 1) {
+      setProgressForIndex(current, 1);
+
+      // If we're on the last slide, stop here (no auto-advance)
+      if (current >= slides.length - 1) return;
+
       next(0);
       return;
     }
@@ -292,11 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!didDrag) {
       slideEl.style.transform = "translateX(0px)";
       slideEl.style.opacity = "1";
-
-      if (x > window.innerWidth / 2) next(0);
-      else prev(0);
-
-      if (!isAnimating) resumeAuto();
+      resumeAuto();
       return;
     }
 
